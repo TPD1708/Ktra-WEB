@@ -1,0 +1,49 @@
+﻿@model KiemTraWeb.Models.HocPhan
+
+@{
+    ViewData["Title"] = "Thêm học phần mới";
+}
+
+<h1>Thêm học phần mới</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaHP" class="control-label"></label>
+                <input asp-for="MaHP" class="form-control" />
+                <span asp-validation-for="MaHP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenHP" class="control-label"></label>
+                <input asp-for="TenHP" class="form-control" />
+                <span asp-validation-for="TenHP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoTinChi" class="control-label"></label>
+                <input asp-for="SoTinChi" class="form-control" />
+                <span asp-validation-for="SoTinChi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuongDuKien" class="control-label"></label>
+                <input asp-for="SoLuongDuKien" class="form-control" />
+                <span asp-validation-for="SoLuongDuKien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Thêm" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay lại danh sách</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

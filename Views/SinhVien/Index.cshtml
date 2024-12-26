@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KiemTraWeb.Models.SinhVien>
+
+@{
+    ViewData["Title"] = "Danh sách sinh viên";
+}
+
+<h1>Danh sách sinh viên</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm mới sinh viên</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MaSV)</th>
+            <th>@Html.DisplayNameFor(model => model.HoTen)</th>
+            <th>@Html.DisplayNameFor(model => model.GioiTinh)</th>
+            <th>@Html.DisplayNameFor(model => model.NgaySinh)</th>
+            <th>@Html.DisplayNameFor(model => model.Hinh)</th>
+            <th>@Html.DisplayNameFor(model => model.NganhHoc.TenNganh)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MaSV)</td>
+                <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+                <td>@Html.DisplayFor(modelItem => item.GioiTinh)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgaySinh)</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Hinh))
+                    {
+                        <img src="@Url.Content("~/images/" + item.Hinh)" alt="@item.HoTen" width="50" height="50" />
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.NganhHoc.TenNganh)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaSV" class="btn btn-sm btn-warning">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.MaSV" class="btn btn-sm btn-info">Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaSV" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

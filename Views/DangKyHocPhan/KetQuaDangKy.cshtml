@@ -1,0 +1,69 @@
+﻿@model KiemTraWeb.Models.DangKy
+
+@{
+    ViewData["Title"] = "Thông tin học phần đã lưu";
+}
+
+<div class="container mt-4">
+    <h3 class="mb-4">Thông Tin Học Phần Đã Lưu</h3>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Thông tin đăng ký</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>MaDK</th>
+                        <th>NgayDK</th>
+                        <th>MaSV</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.MaDK</td>
+                        <td>@Model.NgayDK.ToString("yyyy-MM-dd")</td>
+                        <td>@Model.MaSV</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Chi tiết đăng ký</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>MaDK</th>
+                        <th>MaHP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var stt = 1;
+                    }
+                    @foreach (var item in Model.ChiTietDangKys)
+                    {
+                        <tr>
+                            <td>@stt</td>
+                            <td>@item.MaDK</td>
+                            <td>@item.MaHP</td>
+                        </tr>
+                        stt++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-primary">Quay lại trang chủ</a>
+    </div>
+</div>
+

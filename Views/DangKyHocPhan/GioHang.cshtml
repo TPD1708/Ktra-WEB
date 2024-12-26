@@ -1,0 +1,90 @@
+﻿@model KiemTraWeb.Models.DangKy
+
+@{
+    ViewData["Title"] = "Giỏ đăng ký học phần";
+    var tongSoTinChi = Model.ChiTietDangKys.Sum(m => m.HocPhan.SoTinChi);
+}
+
+<div class="container mt-4">
+    <h2>Đăng Kí Học Phần</h2>
+
+    @if (Model.ChiTietDangKys.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã HP</th>
+                    <th>Tên Học Phần</th>
+                    <th>Số Tín Chỉ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ChiTietDangKys)
+                {
+                    <tr>
+                        <td>@item.HocPhan.MaHP</td>
+                        <td>@item.HocPhan.TenHP</td>
+                        <td>@item.HocPhan.SoTinChi</td>
+                        <td>
+                            @if (!Model.DaXacNhan)
+                            {
+                                <form asp-action="XoaHocPhan" method="post" style="display: inline;">
+                                    <input type="hidden" name="maDK" value="@Model.MaDK" />
+                                    <input type="hidden" name="maHP" value="@item.MaHP" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" class="text-end"><strong>Tổng số tín chỉ:</strong></td>
+                    <td><strong>@tongSoTinChi</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        @if (!Model.DaXacNhan)
+        {
+            <div class="d-flex justify-content-end gap-2">
+                <form asp-action="XoaTatCa" method="post" style="display: inline;">
+                    <input type="hidden" name="maDK" value="@Model.MaDK" />
+                    <button type="submit" class="btn btn-warning">Xóa tất cả</button>
+                </form>
+                <form asp-action="LuuDangKy" method="post" style="display: inline;">
+                    <input type="hidden" name="maDK" value="@Model.MaDK" />
+                    <button type="submit" class="btn btn-primary">Lưu đăng ký</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Đăng ký đã được xác nhận. Bạn không thể thay đổi.
+            </div>
+        }
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success mt-3">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger mt-3">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Chưa có học phần nào được chọn.
+        </div>
+    }
+</div>

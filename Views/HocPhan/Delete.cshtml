@@ -1,0 +1,46 @@
+﻿@model KiemTraWeb.Models.HocPhan
+
+@{
+    ViewData["Title"] = "Xóa học phần";
+}
+
+<h1>Xóa học phần</h1>
+
+<h3>Bạn có chắc chắn muốn xóa học phần này?</h3>
+<div>
+    <h4>Học phần</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaHP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaHP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TenHP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenHP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SoTinChi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SoTinChi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuongDuKien)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SoLuongDuKien)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaHP" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Quay lại danh sách</a>
+    </form>
+</div>
+

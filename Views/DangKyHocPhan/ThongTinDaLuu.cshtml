@@ -1,0 +1,75 @@
+﻿@model KiemTraWeb.Models.DangKy
+
+@{
+    ViewData["Title"] = "Thông tin đã lưu";
+}
+
+<div class="container mt-4">
+    <h2>Thông Tin Đăng Ký Đã Lưu</h2>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Thông tin Đăng ký</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Mã số sinh viên:</dt>
+                <dd class="col-sm-9">@Model.MaSV</dd>
+
+                <dt class="col-sm-3">Họ Tên Sinh Viên:</dt>
+                <dd class="col-sm-9">@Model.SinhVien.HoTen</dd>
+
+                <dt class="col-sm-3">Ngày Đăng Ký:</dt>
+                <dd class="col-sm-9">@Model.NgayDK.ToString("dd/MM/yyyy HH:mm:ss")</dd>
+
+                <dt class="col-sm-3">Trạng thái:</dt>
+                <dd class="col-sm-9">@(Model.DaXacNhan ? "Đã xác nhận" : "Chưa xác nhận")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Chi tiết đăng ký học phần</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã HP</th>
+                        <th>Tên Học Phần</th>
+                        <th>Số Tín Chỉ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var stt = 1;
+                        var tongTinChi = 0;
+                    }
+                    @foreach (var item in Model.ChiTietDangKys)
+                    {
+                        <tr>
+                            <td>@stt</td>
+                            <td>@item.MaHP</td>
+                            <td>@item.HocPhan.TenHP</td>
+                            <td>@item.HocPhan.SoTinChi</td>
+                        </tr>
+                        stt++;
+                        tongTinChi += item.HocPhan.SoTinChi;
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Tổng số tín chỉ:</strong></td>
+                        <td><strong>@tongTinChi</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-primary">Quay lại trang chủ</a>
+    </div>
+</div>
